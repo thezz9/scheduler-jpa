@@ -9,5 +9,6 @@ public class UserCreateRequestDto {
 
     private final String username;
     private final String email;
+    private final String password;
 
 }

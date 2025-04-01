@@ -22,9 +22,13 @@ public class User extends JpaAuditingConfig {
     @Column(name = "email", length = 100, nullable = false)
     private String email;
 
-    public User(String username, String email) {
+    @Column(name = "password", length = 100, nullable = false)
+    private String password;
+
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
+        this.password = password;
     }
 
     public void updateUser(UserUpdateRequestDto dto) {
