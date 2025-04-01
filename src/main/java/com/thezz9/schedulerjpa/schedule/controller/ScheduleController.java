@@ -20,8 +20,7 @@ public class ScheduleController {
 
     @PostMapping
     public ResponseEntity<ScheduleResponseDto> createSchedule(@RequestBody ScheduleCreateRequestDto dto) {
-        ScheduleResponseDto resDto = scheduleService.createSchedule(dto.getUsername(), dto.getTitle(), dto.getContent());
-        return new ResponseEntity<>(resDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(scheduleService.createSchedule(dto), HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -36,13 +35,13 @@ public class ScheduleController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable Long id, @RequestBody ScheduleUpdateRequestDto dto) {
-        ScheduleResponseDto resDto = scheduleService.updateSchedule(id, dto.getTitle(), dto.getContent());
-        return new ResponseEntity<>(resDto, HttpStatus.OK);
+        return new ResponseEntity<>(scheduleService.updateSchedule(id, dto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSchedule(@PathVariable Long id) {
         scheduleService.deleteSchedule(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
