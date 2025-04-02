@@ -2,6 +2,8 @@ package com.thezz9.schedulerjpa.api.comment.repository;
 
 import com.thezz9.schedulerjpa.api.comment.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -18,5 +20,8 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     }
 
     List<Comment> findAllCommentsByScheduleId(Long id);
+
+    @Query("select count(c) from Comment c where c.schedule.id = :scheduleId")
+    int countCommentsByScheduleId(@Param("scheduleId") Long scheduleId);
 
 }

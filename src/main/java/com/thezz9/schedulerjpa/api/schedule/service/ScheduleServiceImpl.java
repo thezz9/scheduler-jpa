@@ -1,5 +1,6 @@
 package com.thezz9.schedulerjpa.api.schedule.service;
 
+import com.thezz9.schedulerjpa.api.comment.repository.CommentRepository;
 import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleCreateRequestDto;
 import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleDeleteRequestDto;
 import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleResponseDto;
@@ -10,6 +11,8 @@ import com.thezz9.schedulerjpa.api.user.entity.User;
 import com.thezz9.schedulerjpa.api.user.repository.UserRepository;
 import com.thezz9.schedulerjpa.common.config.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -33,8 +37,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<ScheduleResponseDto> findAllSchedules() {
-        return scheduleRepository.findAll().stream().map(ScheduleResponseDto::new).toList();
+    public Page<ScheduleResponseDto> findAllSchedules(Pageable pageable) {
+        Page<Schedule> schedules = scheduleRepository.findAll(pageable);
+        return schedules.map(schedule ->
+                new ScheduleResponseDto(schedule, commentRepository.countCommentsByScheduleId(schedule.getId())));
     }
 
     @Override
