@@ -1,6 +1,7 @@
 package com.thezz9.schedulerjpa.api.schedule.controller;
 
 import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleCreateRequestDto;
+import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleDeleteRequestDto;
 import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleResponseDto;
 import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleUpdateRequestDto;
 import com.thezz9.schedulerjpa.api.schedule.service.ScheduleService;
@@ -42,8 +43,8 @@ public class ScheduleController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSchedule(@PathVariable Long id) {
-        scheduleService.deleteSchedule(id);
+    public ResponseEntity<Void> deleteSchedule(@PathVariable Long id, @Valid @RequestBody ScheduleDeleteRequestDto dto) {
+        scheduleService.deleteSchedule(id, dto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

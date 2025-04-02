@@ -11,4 +11,7 @@ public class UserUpdateRequestDto {
     @Size(max = 5, message = "이름은 5자 이내로 입력하세요.")
     private final String username;
 
+    @Size(max = 20, message = "비밀번호는 20자 이내로 입력하세요.")
+    private final String password;
+
 }

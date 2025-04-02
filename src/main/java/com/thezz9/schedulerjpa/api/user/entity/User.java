@@ -22,7 +22,7 @@ public class User extends JpaAuditingConfig {
     @Column(name = "email", length = 100, unique = true, nullable = false)
     private String email;
 
-    @Column(name = "password", length = 100, nullable = false)
+    @Column(name = "password", length = 60, nullable = false)
     private String password;
 
     public User(String username, String email, String password) {

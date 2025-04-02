@@ -25,13 +25,17 @@ public class Schedule extends JpaAuditingConfig {
     @Column(name = "content", columnDefinition = "longtext", nullable = false)
     private String content;
 
+    @Column(name = "password", length = 60, nullable = false)
+    private String password;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Schedule(String title, String content, User user) {
+    public Schedule(String title, String content, String password, User user) {
         this.title = title;
         this.content = content;
+        this.password = password;
         this.user = user;
     }
 

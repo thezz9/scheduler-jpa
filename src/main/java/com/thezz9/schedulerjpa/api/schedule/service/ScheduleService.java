@@ -1,6 +1,7 @@
 package com.thezz9.schedulerjpa.api.schedule.service;
 
 import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleCreateRequestDto;
+import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleDeleteRequestDto;
 import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleResponseDto;
 import com.thezz9.schedulerjpa.api.schedule.dto.ScheduleUpdateRequestDto;
 
@@ -16,6 +17,6 @@ public interface ScheduleService {
 
     ScheduleResponseDto updateSchedule(Long id, ScheduleUpdateRequestDto dto);
 
-    void deleteSchedule(Long id);
+    void deleteSchedule(Long id, ScheduleDeleteRequestDto dto);
 
 }

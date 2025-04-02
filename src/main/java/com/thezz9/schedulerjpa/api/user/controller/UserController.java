@@ -1,6 +1,7 @@
 package com.thezz9.schedulerjpa.api.user.controller;
 
 import com.thezz9.schedulerjpa.api.user.dto.UserCreateRequestDto;
+import com.thezz9.schedulerjpa.api.user.dto.UserDeleteRequestDto;
 import com.thezz9.schedulerjpa.api.user.dto.UserResponseDto;
 import com.thezz9.schedulerjpa.api.user.dto.UserUpdateRequestDto;
 import com.thezz9.schedulerjpa.api.user.service.UserService;
@@ -40,8 +41,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id, @Valid @RequestBody UserDeleteRequestDto dto) {
+        userService.deleteUser(id, dto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

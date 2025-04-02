@@ -1,6 +1,7 @@
 package com.thezz9.schedulerjpa.api.user.service;
 
 import com.thezz9.schedulerjpa.api.user.dto.UserCreateRequestDto;
+import com.thezz9.schedulerjpa.api.user.dto.UserDeleteRequestDto;
 import com.thezz9.schedulerjpa.api.user.dto.UserResponseDto;
 import com.thezz9.schedulerjpa.api.user.dto.UserUpdateRequestDto;
 
@@ -16,6 +17,6 @@ public interface UserService {
 
     UserResponseDto updateUser(Long id, UserUpdateRequestDto dto);
 
-    void deleteUser(Long id);
+    void deleteUser(Long id, UserDeleteRequestDto dto);
 
 }
