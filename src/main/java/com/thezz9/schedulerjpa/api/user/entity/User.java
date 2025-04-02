@@ -33,7 +33,6 @@ public class User extends JpaAuditingConfig {
 
     public void updateUser(UserUpdateRequestDto dto) {
         this.username = dto.getUsername();
-        this.email = dto.getEmail();
     }
 
 }
