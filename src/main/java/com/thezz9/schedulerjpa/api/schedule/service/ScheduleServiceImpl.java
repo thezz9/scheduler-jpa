@@ -39,16 +39,15 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public ScheduleResponseDto findScheduleById(Long id) {
-        Schedule schedule = scheduleRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디 " + id + "에 해당하는 일정이 존재하지 않습니다."));
+        Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
+
         return new ScheduleResponseDto(schedule);
     }
 
     @Transactional
     @Override
     public ScheduleResponseDto updateSchedule(Long id, ScheduleUpdateRequestDto dto) {
-        Schedule schedule = scheduleRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디 " + id + "에 해당하는 일정이 존재하지 않습니다."));
+        Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
         if (passwordEncoder.matches(dto.getPassword(), schedule.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
@@ -60,8 +59,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public void deleteSchedule(Long id, ScheduleDeleteRequestDto dto) {
-        Schedule schedule = scheduleRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디 " + id + "에 해당하는 일정이 존재하지 않습니다."));
+        Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
         if (passwordEncoder.matches(dto.getPassword(), schedule.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");

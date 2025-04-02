@@ -10,13 +10,13 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findUserByUsername(String username);
+    Optional<User> findUserById(Long id);
 
     Optional<User> findUserByEmail(String email);
 
-    default User findUserByUsernameOrElseThrow(String username) {
-        return findUserByUsername(username)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "이름 " + username + "에 해당하는 사용자가 존재하지 않습니다."));
+    default User findUserByIdOrElseThrow(Long id) {
+        return findUserById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디 " + id + "에 해당하는 사용자가 존재하지 않습니다."));
     }
 
     default User findUserByEmailOrElseThrow(String email) {

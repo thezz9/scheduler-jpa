@@ -36,16 +36,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto findUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디 " + id + "에 해당하는 사용자가 존재하지 않습니다."));
+        User user = userRepository.findUserByIdOrElseThrow(id);
+
         return new UserResponseDto(user);
     }
 
     @Transactional
     @Override
     public UserResponseDto updateUser(Long id, UserUpdateRequestDto dto) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디 " + id + "에 해당하는 사용자가 존재하지 않습니다."));
+        User user = userRepository.findUserByIdOrElseThrow(id);
 
         if (passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
@@ -57,8 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long id, UserDeleteRequestDto dto) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디 " + id + "에 해당하는 사용자가 존재하지 않습니다."));
+        User user = userRepository.findUserByIdOrElseThrow(id);
 
         if (passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");

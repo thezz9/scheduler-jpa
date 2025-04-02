@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "schedule")
-@AllArgsConstructor
+@Table(name = "schedules")
 @NoArgsConstructor
 public class Schedule extends JpaAuditingConfig {
 

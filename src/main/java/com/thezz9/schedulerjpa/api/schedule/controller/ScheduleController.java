@@ -22,7 +22,8 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping
-    public ResponseEntity<ScheduleResponseDto> createSchedule(@Valid @RequestBody ScheduleCreateRequestDto dto, HttpServletRequest httpRequest) {
+    public ResponseEntity<ScheduleResponseDto> createSchedule(@Valid @RequestBody ScheduleCreateRequestDto dto,
+                                                              HttpServletRequest httpRequest) {
         String email = (String) httpRequest.getSession().getAttribute("userEmail");
         return new ResponseEntity<>(scheduleService.createSchedule(dto, email), HttpStatus.CREATED);
     }
@@ -38,7 +39,8 @@ public class ScheduleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable Long id, @Valid @RequestBody ScheduleUpdateRequestDto dto) {
+    public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable Long id,
+                                                              @Valid @RequestBody ScheduleUpdateRequestDto dto) {
         return new ResponseEntity<>(scheduleService.updateSchedule(id, dto), HttpStatus.OK);
     }
 
