@@ -7,7 +7,6 @@ import com.thezz9.schedulerjpa.api.comment.service.CommentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/api/comments")
 @RequiredArgsConstructor
 public class CommentController {
 
@@ -25,8 +24,8 @@ public class CommentController {
     public ResponseEntity<CommentResponseDto> createComment(@PathVariable Long id,
                                                             @Valid @RequestBody CommentCreateRequestDto dto,
                                                             HttpServletRequest httpRequest) {
-        String email = (String) httpRequest.getSession().getAttribute("userEmail");
-        return new ResponseEntity<>(commentService.createComment(id, dto, email), HttpStatus.CREATED);
+        Long userId = (Long) httpRequest.getSession().getAttribute("userId");
+        return new ResponseEntity<>(commentService.createComment(id, dto, userId), HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -43,14 +42,14 @@ public class CommentController {
     public ResponseEntity<CommentResponseDto> updateComment(@PathVariable Long id,
                                                             @Valid @RequestBody CommentUpdateRequestDto dto,
                                                             HttpServletRequest httpRequest) {
-        String email = (String) httpRequest.getSession().getAttribute("userEmail");
-        return new ResponseEntity<>(commentService.updateComment(id, dto, email), HttpStatus.OK);
+        Long userId = (Long) httpRequest.getSession().getAttribute("userId");
+        return new ResponseEntity<>(commentService.updateComment(id, dto, userId), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<CommentResponseDto> deleteComment(@PathVariable Long id, HttpServletRequest httpRequest) {
-        String email = (String) httpRequest.getSession().getAttribute("userEmail");
-        commentService.deleteComment(id, email);
+        Long userId = (Long) httpRequest.getSession().getAttribute("userId");
+        commentService.deleteComment(id, userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

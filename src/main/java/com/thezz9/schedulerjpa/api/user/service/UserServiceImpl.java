@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
 
-        user.updateUser(dto);
+        user.updateUser(dto.getUsername());
         return new UserResponseDto(user);
     }
 

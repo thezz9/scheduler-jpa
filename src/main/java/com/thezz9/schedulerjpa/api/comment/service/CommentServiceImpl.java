@@ -26,8 +26,8 @@ public class CommentServiceImpl implements CommentService {
     private final UserRepository userRepository;
 
     @Override
-    public CommentResponseDto createComment(Long id, CommentCreateRequestDto dto, String email) {
-        User user = userRepository.findUserByEmailOrElseThrow(email);
+    public CommentResponseDto createComment(Long id, CommentCreateRequestDto dto, Long userId) {
+        User user = userRepository.findUserByIdOrElseThrow(userId);
         Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
         return new CommentResponseDto(commentRepository.save(new Comment(dto.getContent(), schedule, user)));
@@ -49,22 +49,22 @@ public class CommentServiceImpl implements CommentService {
 
     @Transactional
     @Override
-    public CommentResponseDto updateComment(Long id, CommentUpdateRequestDto dto, String email) {
+    public CommentResponseDto updateComment(Long id, CommentUpdateRequestDto dto, Long userId) {
         Comment comment = commentRepository.findCommentByIdOrElseThrow(id);
 
-        if (!comment.getUser().getEmail().equals(email)) {
+        if (!comment.getUser().getId().equals(userId)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "작성자만 수정할 수 있습니다.");
         }
 
-        comment.updateComment(dto);
+        comment.updateComment(dto.getContent());
         return new CommentResponseDto(comment);
     }
 
     @Override
-    public void deleteComment(Long id, String email) {
+    public void deleteComment(Long id, Long userId) {
         Comment comment = commentRepository.findCommentByIdOrElseThrow(id);
 
-        if (!comment.getUser().getEmail().equals(email)) {
+        if (!comment.getUser().getId().equals(userId)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "작성자만 삭제할 수 있습니다.");
         }
 

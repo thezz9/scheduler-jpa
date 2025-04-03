@@ -30,8 +30,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public ScheduleResponseDto createSchedule(ScheduleCreateRequestDto dto, String email) {
-        User user = userRepository.findUserByEmailOrElseThrow(email);
+    public ScheduleResponseDto createSchedule(ScheduleCreateRequestDto dto, Long userId) {
+        User user = userRepository.findUserByIdOrElseThrow(userId);
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
         return new ScheduleResponseDto(scheduleRepository.save(new Schedule(dto.getTitle(), dto.getContent(), encodedPassword, user)));
     }
@@ -59,10 +59,11 @@ public class ScheduleServiceImpl implements ScheduleService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
 
-        schedule.updateSchedule(dto);
+        schedule.updateSchedule(dto.getTitle(), dto.getContent());
         return new ScheduleResponseDto(schedule);
     }
 
+    @Transactional
     @Override
     public void deleteSchedule(Long id, ScheduleDeleteRequestDto dto) {
         Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
@@ -71,6 +72,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
 
+        commentRepository.deleteBySchedule(schedule);
         scheduleRepository.delete(schedule);
     }
 

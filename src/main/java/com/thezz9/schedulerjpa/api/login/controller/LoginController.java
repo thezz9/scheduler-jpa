@@ -19,18 +19,18 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public ResponseEntity<String> login(@RequestBody LoginRequestDto dto, HttpServletRequest httpRequest) {
 
         User user = loginService.login(dto);
 
         HttpSession session = httpRequest.getSession();
-        session.setAttribute("userEmail", user.getEmail());
+        session.setAttribute("userId", user.getId());
 
         return new ResponseEntity<>("로그인 성공", HttpStatus.OK);
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/api/logout")
     public ResponseEntity<String> logout(HttpServletRequest httpRequest) {
 
         HttpSession session = httpRequest.getSession(false);

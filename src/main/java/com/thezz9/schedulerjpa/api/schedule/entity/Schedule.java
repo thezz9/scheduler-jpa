@@ -38,9 +38,9 @@ public class Schedule extends JpaAuditingConfig {
         this.user = user;
     }
 
-    public void updateSchedule(ScheduleUpdateRequestDto dto) {
-        this.title = dto.getTitle();
-        this.content = dto.getContent();
+    public void updateSchedule(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 
 }

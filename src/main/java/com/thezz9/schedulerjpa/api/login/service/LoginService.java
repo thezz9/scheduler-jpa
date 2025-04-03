@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class LoginService {
@@ -18,13 +20,13 @@ public class LoginService {
 
     public User login(LoginRequestDto dto) {
 
-        User user = userRepository.findUserByEmailOrElseThrow(dto.getEmail());
+        Optional<User> user = userRepository.findUserByEmail(dto.getEmail());
 
-        if (passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+        if (user.isEmpty() || passwordEncoder.matches(dto.getPassword(), user.get().getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "아이디 또는 비밀번호가 일치하지 않습니다.");
         }
 
-        return user;
+        return user.get();
     }
 
 }

@@ -31,8 +31,8 @@ public class User extends JpaAuditingConfig {
         this.password = password;
     }
 
-    public void updateUser(UserUpdateRequestDto dto) {
-        this.username = dto.getUsername();
+    public void updateUser(String username) {
+        this.username = username;
     }
 
 }

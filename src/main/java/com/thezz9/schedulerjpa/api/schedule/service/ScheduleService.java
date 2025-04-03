@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ScheduleService {
 
-    ScheduleResponseDto createSchedule(ScheduleCreateRequestDto dto, String email);
+    ScheduleResponseDto createSchedule(ScheduleCreateRequestDto dto, Long userId);
 
     Page<ScheduleResponseDto> findAllSchedules(Pageable pageable);
 

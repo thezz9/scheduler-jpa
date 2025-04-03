@@ -35,8 +35,8 @@ public class Comment extends JpaAuditingConfig {
         this.user = user;
     }
 
-    public void updateComment(CommentUpdateRequestDto dto) {
-        this.content = dto.getContent();
+    public void updateComment(String content) {
+        this.content = content;
     }
 
 }

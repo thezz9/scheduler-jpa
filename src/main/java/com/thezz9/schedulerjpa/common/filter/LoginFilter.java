@@ -14,7 +14,7 @@ import java.io.IOException;
 @Slf4j
 public class LoginFilter implements Filter {
 
-    private static final String[] ALLOWED_PATHS = {"/", "/users/signup", "/login", "/logout"};
+    private static final String[] ALLOWED_PATHS = {"/", "/api/users/signup", "/api/login", "/api/logout"};
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -32,7 +32,7 @@ public class LoginFilter implements Filter {
 
         HttpSession session = httpRequest.getSession(false);
 
-        if (session == null || session.getAttribute("userEmail") == null) {
+        if (session == null || session.getAttribute("userId") == null) {
             log.warn("로그인되지 않은 사용자 요청: {}", requestURI);
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인 해주세요.");
         }

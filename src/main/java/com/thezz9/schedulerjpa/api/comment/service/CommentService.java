@@ -8,14 +8,14 @@ import java.util.List;
 
 public interface CommentService {
 
-    CommentResponseDto createComment(Long id, CommentCreateRequestDto dto, String email);
+    CommentResponseDto createComment(Long id, CommentCreateRequestDto dto, Long userId);
 
     List<CommentResponseDto> findAllCommentsByScheduleId(Long ScheduleId);
 
     CommentResponseDto findCommentById(Long id);
 
-    CommentResponseDto updateComment(Long id, CommentUpdateRequestDto dto, String email);
+    CommentResponseDto updateComment(Long id, CommentUpdateRequestDto dto, Long userId);
 
-    void deleteComment(Long id, String email);
+    void deleteComment(Long id, Long userId);
 
 }

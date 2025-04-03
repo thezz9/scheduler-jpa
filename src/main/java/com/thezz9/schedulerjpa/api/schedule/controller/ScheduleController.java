@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/schedules")
+@RequestMapping("/api/schedules")
 @RequiredArgsConstructor
 public class ScheduleController {
 
@@ -28,8 +28,8 @@ public class ScheduleController {
     @PostMapping
     public ResponseEntity<ScheduleResponseDto> createSchedule(@Valid @RequestBody ScheduleCreateRequestDto dto,
                                                               HttpServletRequest httpRequest) {
-        String email = (String) httpRequest.getSession().getAttribute("userEmail");
-        return new ResponseEntity<>(scheduleService.createSchedule(dto, email), HttpStatus.CREATED);
+        Long userId = (Long) httpRequest.getSession().getAttribute("userId");
+        return new ResponseEntity<>(scheduleService.createSchedule(dto, userId), HttpStatus.CREATED);
     }
 
     @GetMapping

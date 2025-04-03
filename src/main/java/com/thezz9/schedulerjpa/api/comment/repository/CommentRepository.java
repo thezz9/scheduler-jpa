@@ -1,7 +1,9 @@
 package com.thezz9.schedulerjpa.api.comment.repository;
 
 import com.thezz9.schedulerjpa.api.comment.entity.Comment;
+import com.thezz9.schedulerjpa.api.schedule.entity.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -23,5 +25,9 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     @Query("select count(c) from Comment c where c.schedule.id = :scheduleId")
     int countCommentsByScheduleId(@Param("scheduleId") Long scheduleId);
+
+    @Modifying
+    @Query("DELETE FROM Comment c WHERE c.schedule = :schedule")
+    void deleteBySchedule(@Param("schedule") Schedule schedule);
 
 }

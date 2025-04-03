@@ -19,10 +19,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "아이디 " + id + "에 해당하는 사용자가 존재하지 않습니다."));
     }
 
-    default User findUserByEmailOrElseThrow(String email) {
-        return findUserByEmail(email)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "이메일 " + email + "에 해당하는 사용자가 존재하지 않습니다."));
-    }
-
 }
 
