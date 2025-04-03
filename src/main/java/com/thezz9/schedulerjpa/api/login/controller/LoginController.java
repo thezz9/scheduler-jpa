@@ -19,6 +19,7 @@ public class LoginController {
 
     private final LoginService loginService;
 
+    /** 로그인 */
     @PostMapping("/api/login")
     public ResponseEntity<String> login(@RequestBody LoginRequestDto dto, HttpServletRequest httpRequest) {
 
@@ -30,6 +31,7 @@ public class LoginController {
         return new ResponseEntity<>("로그인 성공", HttpStatus.OK);
     }
 
+    /** 로그아웃 */
     @GetMapping("/api/logout")
     public ResponseEntity<String> logout(HttpServletRequest httpRequest) {
 

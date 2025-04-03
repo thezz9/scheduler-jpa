@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SessionLogger {
 
+    // 세션 정보 출력 메서드
     public static void logSessionInfo(HttpSession session) {
         log.info("session.getId()={}", session.getId());
         log.info("session.getMaxInactiveInterval()={}", session.getMaxInactiveInterval());

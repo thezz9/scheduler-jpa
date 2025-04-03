@@ -15,6 +15,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // ResponseStatusException 핸들러
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<Map<String, Object>> handleResponseStatusException(ResponseStatusException ex) {
         Map<String, Object> error = new HashMap<>();
@@ -24,6 +25,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(ex.getStatusCode()).body(error);
     }
 
+    // handleValidationExceptions 핸들러
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -33,6 +35,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
+    // handleDataIntegrityViolationException 핸들러
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Map<String, Object>> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         Map<String, Object> error = new HashMap<>();

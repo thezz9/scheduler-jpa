@@ -25,6 +25,7 @@ public class CommentServiceImpl implements CommentService {
     private final ScheduleRepository scheduleRepository;
     private final UserRepository userRepository;
 
+    /** 댓글 생성 */
     @Override
     public CommentResponseDto createComment(Long id, CommentCreateRequestDto dto, Long userId) {
         User user = userRepository.findUserByIdOrElseThrow(userId);
@@ -33,6 +34,7 @@ public class CommentServiceImpl implements CommentService {
         return new CommentResponseDto(commentRepository.save(new Comment(dto.getContent(), schedule, user)));
     }
 
+    /** 특정 스케줄 댓글 전체 조회 */
     @Override
     public List<CommentResponseDto> findAllCommentsByScheduleId(Long ScheduleId) {
         Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(ScheduleId);
@@ -40,6 +42,7 @@ public class CommentServiceImpl implements CommentService {
                 .stream().map(CommentResponseDto::new).toList();
     }
 
+    /** 댓글 단건 조회 */
     @Override
     public CommentResponseDto findCommentById(Long id) {
         Comment comment = commentRepository.findCommentByIdOrElseThrow(id);
@@ -47,11 +50,13 @@ public class CommentServiceImpl implements CommentService {
         return new CommentResponseDto(comment);
     }
 
+    /** 댓글 수정 */
     @Transactional
     @Override
     public CommentResponseDto updateComment(Long id, CommentUpdateRequestDto dto, Long userId) {
         Comment comment = commentRepository.findCommentByIdOrElseThrow(id);
 
+        // 로그인 유저가 댓글 작성자인지 검증
         if (!comment.getUser().getId().equals(userId)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "작성자만 수정할 수 있습니다.");
         }
@@ -60,10 +65,12 @@ public class CommentServiceImpl implements CommentService {
         return new CommentResponseDto(comment);
     }
 
+    /** 댓글 삭제 */
     @Override
     public void deleteComment(Long id, Long userId) {
         Comment comment = commentRepository.findCommentByIdOrElseThrow(id);
 
+        // 로그인 유저가 댓글 작성자인지 검증
         if (!comment.getUser().getId().equals(userId)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "작성자만 삭제할 수 있습니다.");
         }

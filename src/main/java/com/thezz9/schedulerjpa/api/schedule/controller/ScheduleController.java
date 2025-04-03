@@ -25,6 +25,7 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
+    /** 일정 생성 */
     @PostMapping
     public ResponseEntity<ScheduleResponseDto> createSchedule(@Valid @RequestBody ScheduleCreateRequestDto dto,
                                                               HttpServletRequest httpRequest) {
@@ -32,23 +33,27 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleService.createSchedule(dto, userId), HttpStatus.CREATED);
     }
 
+    /** 일정 전체 조회 */
     @GetMapping
     public ResponseEntity<Page<ScheduleResponseDto>> findAllSchedules(
             @PageableDefault(size = 5, page = 0, sort = "modifiedAt", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(scheduleService.findAllSchedules(pageable));
     }
 
+    /** 일정 단건 조회 */
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> findScheduleById(@PathVariable Long id) {
         return new ResponseEntity<>(scheduleService.findScheduleById(id), HttpStatus.OK);
     }
 
+    /** 일정 수정 */
     @PutMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable Long id,
                                                               @Valid @RequestBody ScheduleUpdateRequestDto dto) {
         return new ResponseEntity<>(scheduleService.updateSchedule(id, dto), HttpStatus.OK);
     }
 
+    /** 일정 삭제 */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSchedule(@PathVariable Long id, @Valid @RequestBody ScheduleDeleteRequestDto dto) {
         scheduleService.deleteSchedule(id, dto);
