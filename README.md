@@ -32,4 +32,4 @@
 ![image](https://github.com/user-attachments/assets/52e68231-d9db-4763-b1d6-4d1c6579a3b1)
 
 ## 트러블슈팅
-**작성 예정**
+**[velog](https://velog.io/@harvard--/Spring-%EC%9D%BC%EC%A0%95-%EA%B4%80%EB%A6%AC-API-with-JPA)**
