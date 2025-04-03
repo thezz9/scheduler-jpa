@@ -1,6 +1,5 @@
 package com.thezz9.schedulerjpa.api.comment.entity;
 
-import com.thezz9.schedulerjpa.api.comment.dto.CommentUpdateRequestDto;
 import com.thezz9.schedulerjpa.api.schedule.entity.Schedule;
 import com.thezz9.schedulerjpa.api.user.entity.User;
 import com.thezz9.schedulerjpa.common.config.JpaAuditingConfig;

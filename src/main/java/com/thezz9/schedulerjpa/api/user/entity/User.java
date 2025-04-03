@@ -1,7 +1,6 @@
 package com.thezz9.schedulerjpa.api.user.entity;
 
 import com.thezz9.schedulerjpa.common.config.JpaAuditingConfig;
-import com.thezz9.schedulerjpa.api.user.dto.UserUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
