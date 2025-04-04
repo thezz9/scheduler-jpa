@@ -31,5 +31,41 @@
 ## 📊 ERD
 ![image](https://github.com/user-attachments/assets/52e68231-d9db-4763-b1d6-4d1c6579a3b1)
 
+## 📦 패키지 구조
+```
+📁 src
+ └── 📁 main
+     └── 📁 java
+         └── 📁 com.thezz9.schedulerjpa
+             ├── 📁 api
+             │   ├── 📁 comment
+             │   │   ├── 📁 controller
+             │   │   ├── 📁 dto
+             │   │   ├── 📁 entity
+             │   │   ├── 📁 repository
+             │   │   └── 📁 service
+             │   ├── 📁 schedule
+             │   │   ├── 📁 controller
+             │   │   ├── 📁 dto
+             │   │   ├── 📁 entity
+             │   │   ├── 📁 repository
+             │   │   └── 📁 service
+             │   ├── 📁 user
+             │   │   ├── 📁 controller
+             │   │   ├── 📁 dto
+             │   │   ├── 📁 entity
+             │   │   ├── 📁 repository
+             │   │   └── 📁 service
+             │   └── 📁 login
+             │       ├── 📁 controller
+             │       ├── 📁 dto
+             │       └── 📁 service
+             └── 📁 common
+                 ├── 📁 config
+                 ├── 📁 filter
+                 ├── 📁 handler
+                 └── 📁 logger
+```
+
 ## 트러블슈팅
 **[velog](https://velog.io/@harvard--/Spring-%EC%9D%BC%EC%A0%95-%EA%B4%80%EB%A6%AC-API-with-JPA)**
