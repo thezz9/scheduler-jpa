@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findUserByIdOrElseThrow(id);
 
         // 비밀번호 검증
-        if (passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
 
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findUserByIdOrElseThrow(id);
 
         // 비밀번호 검증
-        if (passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
 

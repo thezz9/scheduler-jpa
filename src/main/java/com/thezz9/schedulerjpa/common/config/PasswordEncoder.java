@@ -17,7 +17,7 @@ public class PasswordEncoder {
     // 검증
     public boolean matches(String rawPassword, String encodedPassword) {
         BCrypt.Result result = BCrypt.verifyer().verify(rawPassword.toCharArray(), encodedPassword);
-        return !result.verified;
+        return result.verified;
     }
 
 }

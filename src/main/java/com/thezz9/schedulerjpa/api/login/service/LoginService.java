@@ -24,7 +24,7 @@ public class LoginService {
         Optional<User> user = userRepository.findUserByEmail(dto.getEmail());
 
         // 사용자가 입력한 이메일과 비밀번호 검증
-        if (user.isEmpty() || passwordEncoder.matches(dto.getPassword(), user.get().getPassword())) {
+        if (user.isEmpty() || !passwordEncoder.matches(dto.getPassword(), user.get().getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "아이디 또는 비밀번호가 일치하지 않습니다.");
         }
 

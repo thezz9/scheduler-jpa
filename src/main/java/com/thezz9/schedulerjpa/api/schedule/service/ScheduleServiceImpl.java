@@ -60,7 +60,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
         // 비밀번호 검증
-        if (passwordEncoder.matches(dto.getPassword(), schedule.getPassword())) {
+        if (!passwordEncoder.matches(dto.getPassword(), schedule.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
 
@@ -75,7 +75,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         Schedule schedule = scheduleRepository.findScheduleByIdOrElseThrow(id);
 
         // 비밀번호 검증
-        if (passwordEncoder.matches(dto.getPassword(), schedule.getPassword())) {
+        if (!passwordEncoder.matches(dto.getPassword(), schedule.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
 
